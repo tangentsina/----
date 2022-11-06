@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2022.10.1)  5 NOV 2022 13:40
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2022.10.1)  6 NOV 2022 15:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -336,8 +336,7 @@ Package fontspec Info: Font family 'SimHei(0)' created for font 'SimHei' with
 (fontspec)             <->"SimHei/OT:script=hani;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
-
-No file ctexart.aux.
+ (./ctexart.aux)
 \openout1 = `ctexart.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
@@ -356,7 +355,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
-ABD: EverySelectfont initializing macros
+ ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 34.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
@@ -535,13 +534,12 @@ Package fontspec Info: Font family 'FangSong(1)' created for font 'FangSong'
 
 ] (./ctexart.aux) ) 
 Here is how much of TeX's memory you used:
- 7334 strings out of 479418
- 217334 string characters out of 5884145
+ 7336 strings out of 479418
+ 217358 string characters out of 5884145
  492600 words of memory out of 5000000
  24733 multiletter control sequences out of 15000+600000
  534040 words of font info for 113 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  56i,10n,82p,798b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Error 1 (driver return code) generating output;
-file ctexart.pdf may not be valid.
+Output written on ctexart.pdf (1 page).

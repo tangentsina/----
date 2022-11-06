@@ -10,7 +10,7 @@
 %   Copyright by NWPU Metaphysics Office, GPLv3-LICENSE                        %
 %------------------------------------------------------------------------------%
 
-\documentclass[a4paper,fontset=none]{ctexart}
+\documentclass[a4paper,fontset=none]{ctexbook}
 
 
 
@@ -89,6 +89,7 @@
 
 
 %---------------------------------设置中文字体----------------------------------%
+\usepackage{fontspec}
 \usepackage{CJKnumb}
 % 中文字体
 \setCJKmainfont{SimSun}[AutoFakeBold, AutoFakeSlant]
@@ -104,6 +105,10 @@
 % 重定义 \emph 和 \strong 的样式，参见 fontspec 宏包文档
 \emfontdeclare{\kaishu\itshape}
 \strongfontdeclare{\heiti\bfseries}
+
+
+\setCJKfamilyfont{nwpu}{nwpuname}
+\newcommand{\fNWPU}{\CJKfamily{nwpu}}
 %------------------------------------------------------------------------------%
 
 
@@ -154,26 +159,121 @@
 
 
 
+%--------------------------------设置定理类环境--------------------------------%
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+% \usepackage[amsthm,thmmarks]{ntheorem}
+\newtheorem{myexample}{例}
+\newtheorem{thm}{定理}
+%------------------------------------------------------------------------------%
+% 这部分有问题
 
-% 修改页眉页脚（演示）
+
+
+
+%--------------------------设置中文段落缩进与正文版式--------------------------%
+\XeTeXlinebreaklocale "zh"                      % 使用中文的换行风格
+\XeTeXlinebreakskip = 0pt plus 1pt              % 调整换行逻辑的弹性大小
+\usepackage{indentfirst}                        % 段首空格设置
+\setlength{\parindent}{26pt}                    % 段首空格长度
+%\setlength{\parskip}{3pt plus 1pt minus 1pt}
+\setlength{\parskip}{0pt}    % 段落间距，于具体内容进行动态调整
+\renewcommand{\baselinestretch}{1.25}           % 行距
+%------------------------------------------------------------------------------%
+
+
+
+% %----------------------------设置段落标题与目录格式----------------------------%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+\newcommand\sectionID[1]{第\CJKnumber{#1}章}
+\renewcommand{\chaptername}{第\CJKnumber{\thechapter}章}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\contentsname}{目~录}
+\newcommand{\keywords}[1]{\\ \\ \textbf{关~键~词}：#1}
+
+
+\titleformat{\chapter}[hang]{\normalfont\sSanhao\filcenter\heiti\bf}%大标题三号黑
+{\sSanhao{\chaptertitlename}}{20pt}{\sSanhao}
+\titleformat{\section}[hang]{\heiti \bf \sSihao} %小标题四号黑
+{\sSihao \thesection}{0.5em}{}{}
+\titleformat{\subsection}[hang]{\heiti \bf \sXiaosi}%
+{\sXiaosi \thesubsection}{0.5em}{}{}
+% \titleformat{\subsubsection}[hang]{\heiti \bf}%
+% {(\arabic{subsubsection})}{0.5em}{}{}   % 小标题式的subsubsection:(4) 标题
+
+
+% 缩小正文中各级标题之间的缩进
+\titlespacing{\chapter}{0pt}{-3ex plus .1ex minus .2ex}{0.25em}
+\titlespacing{\section}{0pt}{-0.2em}{0em}
+\titlespacing{\subsection}{0pt}{0.5em}{0em}
+\titlespacing{\subsubsection}{0pt}{0.25em}{0pt}
+
+% 定义目录中各级标题之间的格式以及缩进
+\dottedcontents{section}[1.16cm]{}{1.8em}{5pt}
+\dottedcontents{subsection}[2.00cm]{}{2.7em}{5pt}
+\dottedcontents{subsubsection}[2.86cm]{}{3.4em}{5pt}
+\titlecontents{chapter}[0pt]{\fHei\vspace{0.5em}}%
+{\contentsmargin{0pt}\fHei\makebox[0pt][l]{\chapterID{\thecontentslabel}}\hspace{3.8em}}%
+{\contentsmargin{0pt}\heiti}%
+{\titlerule*[.5pc]{.}\contentspage}[\vspace{0em}]
+% %------------------------------------------------------------------------------%
+
+
+
+
+
+%---------------------------------设置页眉页脚---------------------------------%
 \usepackage{fancyhdr}
+\usepackage{fancyref}
+\addtolength{\headsep}{-0.1cm}          %页眉位置
+\addtolength{\footskip}{-0.1cm}         %页脚位置
+\addtolength{\topmargin}{-0.2cm}        %仍需调整
+\newcommand{\makeheadrule}{
+    \makebox[0pt][l]{\rule[.7\baselineskip]{\headwidth}{0.8pt}}
+    \vskip-.8\baselineskip
+}
+\makeatletter
+\renewcommand{\headrule}{%
+    {\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi\makeheadrule}}
+\pagestyle{fancyplain}
 \fancyhf{}
-\fancyhead[C]{\small 某某大学本科毕业论文（2019）}
-\fancyfoot[C]{\small \thepage}
-\pagestyle{fancy}
+\fancyfoot[C,C]{\sWuhao-~\thepage~-}
+% 后续文字可以自行修改
+\chead{\sSanhao\raisebox{0.04cm}%
+    {\fNWPU 西北工业大学} \songti{{\textbf{本科毕业设计（论文）}}}}
+%------------------------------------------------------------------------------%
 
 
 \begin{document}
 
-\section{中文字体}
+\renewcommand{\baselinestretch}{1.25}
+\sXiaosi\songti
 
-\subsection{文本标记}
+\chapter{中文字体}
+\section{可听化技术概述}
+
+\subsection{可听化的概念}
 
 
 
-\subsection{字体命令}
 
 
+可听化（Auralization）[1]是近年来随着声学仿真技术的长足发展而出现的新概念，它的具体含义是通过对一包含单个（或者多个）声源的声场进行物理或数学建模，以达到声音绘制（Audio rendering）或称声学仿真（Acoustical simulation）的目的。这样，人们可以获得该声场中任意位置的双耳听觉感受。换句话说，可听化技术在客观上主要是模拟特定声场（包括声源、声传播环境以及聆听者三要素）中声音传播的物理过程，从而使其中的聆听者作为一个主体能够获得对整个场景声学特性的主观感知[2~5]。
+
+可听化（Auralization）[1]是近年来随着声学仿真技术的长足发展而出现的新概念，它的具体含义是通过对一包含单个（或者多个）声源的声场进行物理或数学建模，以达到声音绘制（Audio rendering）或称声学仿真（Acoustical simulation）的目的。这样，人们可以获得该声场中任意位置的双耳听觉感受。换句话说，可听化技术在客观上主要是模拟特定声场（包括声源、声传播环境以及聆听者三要素）中声音传播的物理过程，从而使其中的聆听者作为一个主体能够获得对整个场景声学特性的主观感知[2~5]。
+
+可听化（Auralization）[1]是近年来随着声学仿真技术的长足发展而出现的新概念，它的具体含义是通过对一包含单个（或者多个）声源的声场进行物理或数学建模，以达到声音绘制（Audio rendering）或称声学仿真（Acoustical simulation）的目的。这样，人们可以获得该声场中任意位置的双耳听觉感受。换句话说，可听化技术在客观上主要是模拟特定声场（包括声源、声传播环境以及聆听者三要素）中声音传播的物理过程，从而使其中的聆听者作为一个主体能够获得对整个场景声学特性的主观感知[2~5]。
+
+可听化（Auralization）[1]是近年来随着声学仿真技术的长足发展而出现的新概念，它的具体含义是通过对一包含单个（或者多个）声源的声场进行物理或数学建模，以达到声音绘制（Audio rendering）或称声学仿真（Acoustical simulation）的目的。这样，人们可以获得该声场中任意位置的双耳听觉感受。换句话说，可听化技术在客观上主要是模拟特定声场（包括声源、声传播环境以及聆听者三要素）中声音传播的物理过程，从而使其中的聆听者作为一个主体能够获得对整个场景声学特性的主观感知[2~5]。
+
+可听化（Auralization）[1]是近年来随着声学仿真技术的长足发展而出现的新概念，它的具体含义是通过对一包含单个（或者多个）声源的声场进行物理或数学建模，以达到声音绘制（Audio rendering）或称声学仿真（Acoustical simulation）的目的。这样，人们可以获得该声场中任意位置的双耳听觉感受。换句话说，可听化技术在客观上主要是模拟特定声场（包括声源、声传播环境以及聆听者三要素）中声音传播的物理过程，从而使其中的聆听者作为一个主体能够获得对整个场景声学特性的主观感知[2~5]。
+
+可听化（Auralization）[1]是近年来随着声学仿真技术的长足发展而出现的新概念，它的具体含义是通过对一包含单个（或者多个）声源的声场进行物理或数学建模，以达到声音绘制（Audio rendering）或称声学仿真（Acoustical simulation）的目的。这样，人们可以获得该声场中任意位置的双耳听觉感受。换句话说，可听化技术在客观上主要是模拟特定声场（包括声源、声传播环境以及聆听者三要素）中声音传播的物理过程，从而使其中的聆听者作为一个主体能够获得对整个场景声学特性的主观感知[2~5]。
 
 
 
